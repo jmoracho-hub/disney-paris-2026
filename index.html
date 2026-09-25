@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#D9622B">
-<meta name="description" content="Agenda de bolsillo para Disneyland Paris, 8-11 octubre 2026: horarios, reservas, alturas minimas y consejos para no caer en trampas de turista.">
+<meta name="description" content="Agenda de bolsillo para Disneyland Paris, 8-11 octubre 2026: horarios, recomendaciones, alturas minimas y consejos para no caer en trampas de turista.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Ruta Disney">
@@ -149,6 +149,20 @@
   }
   li.done .stop-title, li.done .stop-text{ opacity:.55; text-decoration:line-through; }
 
+  .id-row{
+    margin-top:9px; padding-top:9px; border-top:1px dashed var(--line);
+    display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  }
+  .id-pair{ display:flex; flex-direction:column; gap:1px; }
+  .id-label{ font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-soft); }
+  .id-value{ font-size:14px; font-weight:600; color:var(--ink); }
+  .copy-btn{
+    margin-left:auto; appearance:none; border:1px solid var(--accent); background:transparent;
+    color:var(--accent); font-family:'IBM Plex Mono', monospace; font-size:11.5px; font-weight:600;
+    padding:6px 10px; border-radius:8px; cursor:pointer;
+  }
+  .copy-btn:active{ background:var(--accent); color:var(--accent-ink); }
+
   .note-card{
     margin-top:18px; padding:13px 14px; border-radius:12px;
     background:var(--surface-2); border:1px solid var(--line);
@@ -165,6 +179,20 @@
     padding:10px 12px; font-size:13.5px; color:var(--ink);
   }
   .tip-group li b{ color:var(--ink); }
+
+  .rec-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:10px;
+    padding:11px 12px; margin-bottom:8px;
+  }
+  .rec-top{ display:flex; align-items:baseline; justify-content:space-between; gap:8px; flex-wrap:wrap; }
+  .rec-name{ font-size:14.5px; font-weight:600; }
+  .rec-pills{ display:flex; gap:6px; flex-wrap:wrap; }
+  .info-pill{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; font-weight:600;
+    padding:2px 7px; border-radius:6px; background:var(--surface-2); color:var(--ink-soft); white-space:nowrap;
+  }
+  .rec-text{ font-size:13.5px; color:var(--ink-soft); margin-top:5px; }
+  .rec-link{ display:inline-block; margin-top:6px; font-size:12.5px; font-weight:600; }
 
   /* Heights view */
   table.heights{ width:100%; border-collapse:collapse; margin-top:14px; }
@@ -220,11 +248,13 @@
     rest:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 4.5a7 7 0 1 0 5.5 12A8 8 0 0 1 15 4.5Z"/></svg>',
     food:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 3v7a2 2 0 0 0 2 2v9"/><path d="M7 3v5M9 3v5"/><path d="M17 3c-1.5 0-3 1.8-3 5s1 5 1 5v8"/></svg>',
     fireworks:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="12" y1="3" x2="12" y2="7"/><line x1="12" y1="17" x2="12" y2="21"/><line x1="3" y1="12" x2="7" y2="12"/><line x1="17" y1="12" x2="21" y2="12"/><line x1="6" y1="6" x2="8.5" y2="8.5"/><line x1="15.5" y1="15.5" x2="18" y2="18"/><line x1="18" y1="6" x2="15.5" y2="8.5"/><line x1="8.5" y1="15.5" x2="6" y2="18"/><circle cx="12" cy="12" r="2"/></svg>',
-    bag:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="8" width="14" height="12" rx="2"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/><line x1="9" y1="12" x2="9" y2="16"/><line x1="15" y1="12" x2="15" y2="16"/></svg>'
+    bag:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="8" width="14" height="12" rx="2"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/><line x1="9" y1="12" x2="9" y2="16"/><line x1="15" y1="12" x2="15" y2="16"/></svg>',
+    badge:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="5" width="16" height="14" rx="2.5"/><circle cx="9.5" cy="10.5" r="1.8"/><path d="M6.5 16c.6-1.8 2-2.6 3-2.6s2.4.8 3 2.6"/><line x1="14" y1="9.5" x2="17.5" y2="9.5"/><line x1="14" y1="12.5" x2="17.5" y2="12.5"/></svg>'
   };
 
   var DAYS = [
     { id:"d8", label:"JUE", date:"8", title:"Llegada", stops:[
+        {time:"Confirmación", icon:"badge", title:"Datos de la reserva", text:"Paquete Staycity + entradas. Número de cliente y de reserva disponibles en la copia privada (no publicados aquí por seguridad, al ser una web pública).", ticket:true},
         {time:"Tarde", icon:"train", title:"TGV a Marne-la-Vallée Chessy", text:"Comprobad si hay trasbordo en París; con niños, mejor llevar margen."},
         {time:"Tarde", icon:"home", title:"Check-in en Staycity Aparthotels", text:"Tiene cocina — aprovechadla para desayunos y algún táper."},
         {time:"Tarde-noche", icon:"cart", title:"Súper en Bailly-Romainvilliers", text:"Desayunos y snacks para los peques, sin depender del parque."},
@@ -267,8 +297,8 @@
 
   var TIPS = [
     { group:"Antes de ir", items:[
-      "Cargad las 4 entradas en la app oficial de Disneyland Paris y activad el rider swap.",
-      "Sin entradas aún a una semana del viaje: llamad a la agencia del paquete Staycity para confirmar; antes de eso es normal."
+      "Cargad las 4 entradas en la app oficial de Disneyland Paris con el número de reserva (tarjeta arriba, en Jueves 8) y activad el rider swap.",
+      "Llevad el número de cliente y de reserva también en papel o capturad la pantalla, por si falla la cobertura en el check-in."
     ]},
     { group:"Comida y compras", items:[
       "La cocina del Staycity es la mejor arma contra los precios de dentro del parque: desayunos y algún táper.",
@@ -290,6 +320,30 @@
       "Desconfiad de quien ofrezca “reservas garantizadas” de Chez Rémy fuera del sistema oficial."
     ]}
   ];
+
+  var RECS = {
+    restaurants: [
+      { group:"Cena del jueves 8 · Disney Village", items:[
+        { name:"Rainforest Cafe", rating:"4.3★", price:"€€", text:"El mejor valorado con diferencia. Ambiente selva con peces y animales animatrónicos — entretiene a Jorge y Martina mientras coméis.", link:"https://maps.google.com/?cid=13204123828219928026" },
+        { name:"Annette's Diner", rating:"3.9★", price:"€€", text:"Diner americano años 50, camareras sobre patines. Hamburguesas contundentes; servicio irregular según las reseñas.", link:"https://maps.google.com/?cid=18234409281205859866" },
+        { name:"La Grange — Billy Bob's", rating:"3.8★", price:"€€", text:"Bufé libre: sin líos de carta con niños cansados, coméis lo que queráis.", link:"https://maps.google.com/?cid=6704123942359421134" }
+      ]},
+      { group:"Plan B sábado 10 · si no sale Chez Rémy", items:[
+        { name:"Stark Factory", rating:"3.4★", price:"€€", text:"Quick-service en Avengers Campus, sin reserva. Pizza y pasta — resuelve rápido con niños cansados.", link:"https://maps.google.com/?cid=2049510466144234211" },
+        { name:"The Regal View", rating:"3.9★", price:"€€€€", text:"Cena con princesas en World of Frozen, muy bien valorado pero caro y necesita reserva con antelación — no sirve de última hora.", link:"https://maps.google.com/?cid=4761715765748682813" }
+      ]}
+    ],
+    mustRide: [
+      { group:"Imprescindibles para los 4, sin altura mínima", items:[
+        { name:"Frozen Ever After", tag:"Adventure World", text:"La atracción más demandada del año, ya es prioridad del sábado." },
+        { name:"Phantom Manor", tag:"Disneyland Park", text:"La casa encantada única de este parque, con una historia que no existe en ningún otro Disney. Puede ser intensa para Jorge." }
+      ]},
+      { group:"Si llegáis a la altura (rider swap)", items:[
+        { name:"Crush's Coaster", tag:"107 cm · Adventure World", text:"La atracción con más cola de Disney Adventure World, por algo." },
+        { name:"Star Wars Hyperspace Mountain", tag:"120 cm · Disneyland Park", text:"La gran atracción de Disneyland Park." }
+      ]}
+    ]
+  };
 
   var HEIGHTS = [
     {name:"Avengers Assemble: Flight Force", min:120},
@@ -339,7 +393,7 @@
   }
 
   function renderTabs(activeId){
-    var extra = [{id:"tips", label:"TIPS", date:"★"}, {id:"heights", label:"ALTURAS", date:"⇕"}];
+    var extra = [{id:"recs", label:"RECOM", date:"✦"}, {id:"tips", label:"TIPS", date:"★"}, {id:"heights", label:"ALTURAS", date:"⇕"}];
     var all = DAYS.concat(extra);
     var nav = document.getElementById("tabs");
     nav.innerHTML = "";
@@ -370,13 +424,45 @@
         '<div class="stop-title">' + stop.title + '</div>' +
         '<div class="stop-text">' + stop.text + '</div>' +
         (stop.tag ? '<span class="tag">' + stop.tag + '</span>' : '') +
+        (stop.copyValue ? renderCopyRow(stop) : '') +
       '</div>';
     var cb = li.querySelector(".check");
     cb.addEventListener("change", function(){
       li.classList.toggle("done", cb.checked);
       store(checkKey, cb.checked);
     });
+    var copyBtn = li.querySelector(".copy-btn");
+    if(copyBtn){
+      copyBtn.addEventListener("click", function(){
+        var full = stop.copyLabel + " " + stop.copyValue + " · " + stop.copyLabel2 + " " + stop.copyValue2;
+        var done = function(){ copyBtn.textContent = "Copiado"; setTimeout(function(){ copyBtn.textContent = "Copiar"; }, 1500); };
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          navigator.clipboard.writeText(full).then(done, function(){ selectFallback(li); });
+        } else {
+          selectFallback(li);
+        }
+      });
+    }
     return li;
+  }
+
+  function renderCopyRow(stop){
+    return '<div class="id-row">' +
+      '<div class="id-pair"><span class="id-label">' + stop.copyLabel + '</span><span class="id-value mono">' + stop.copyValue + '</span></div>' +
+      '<div class="id-pair"><span class="id-label">' + stop.copyLabel2 + '</span><span class="id-value mono">' + stop.copyValue2 + '</span></div>' +
+      '<button type="button" class="copy-btn">Copiar</button>' +
+    '</div>';
+  }
+
+  function selectFallback(li){
+    try{
+      var range = document.createRange();
+      var node = li.querySelector(".id-row");
+      range.selectNodeContents(node);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }catch(e){ /* selection unavailable: nothing to fall back to */ }
   }
 
   function renderDay(day){
@@ -421,6 +507,58 @@
     return el;
   }
 
+  function renderRecs(){
+    var el = document.createElement("section");
+    el.className = "view";
+    el.id = "view-recs";
+    var head = document.createElement("div");
+    head.className = "day-title";
+    head.innerHTML = "<h2>Sugerencias y recomendaciones</h2>";
+    el.appendChild(head);
+
+    var subhead1 = document.createElement("h3");
+    subhead1.className = "tip-group-title-standalone";
+    subhead1.style.cssText = "font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--accent);margin:14px 0 8px;";
+    subhead1.textContent = "Dónde comer";
+    el.appendChild(subhead1);
+
+    RECS.restaurants.forEach(function(g){
+      var group = document.createElement("div");
+      group.className = "tip-group";
+      var cards = g.items.map(function(r){
+        return '<div class="rec-card">' +
+          '<div class="rec-top"><span class="rec-name">' + r.name + '</span>' +
+          '<span class="rec-pills"><span class="info-pill">' + r.rating + '</span><span class="info-pill">' + r.price + '</span></span></div>' +
+          '<div class="rec-text">' + r.text + '</div>' +
+          '<a class="rec-link" href="' + r.link + '" target="_blank" rel="noopener">Ver en Google Maps →</a>' +
+        '</div>';
+      }).join("");
+      group.innerHTML = "<h3>" + g.group + "</h3>" + cards;
+      el.appendChild(group);
+    });
+
+    var subhead2 = document.createElement("h3");
+    subhead2.style.cssText = "font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--accent);margin:18px 0 8px;";
+    subhead2.textContent = "Qué no os podéis perder";
+    el.appendChild(subhead2);
+
+    RECS.mustRide.forEach(function(g){
+      var group = document.createElement("div");
+      group.className = "tip-group";
+      var cards = g.items.map(function(r){
+        return '<div class="rec-card">' +
+          '<div class="rec-top"><span class="rec-name">' + r.name + '</span>' +
+          '<span class="rec-pills"><span class="info-pill">' + r.tag + '</span></span></div>' +
+          '<div class="rec-text">' + r.text + '</div>' +
+        '</div>';
+      }).join("");
+      group.innerHTML = "<h3>" + g.group + "</h3>" + cards;
+      el.appendChild(group);
+    });
+
+    return el;
+  }
+
   function renderHeights(){
     var el = document.createElement("section");
     el.className = "view";
@@ -451,6 +589,7 @@
   function buildViews(){
     var main = document.getElementById("main");
     DAYS.forEach(function(d){ var v = renderDay(d); VIEWS[d.id] = v; main.appendChild(v); });
+    VIEWS.recs = renderRecs(); main.appendChild(VIEWS.recs);
     VIEWS.tips = renderTips(); main.appendChild(VIEWS.tips);
     VIEWS.heights = renderHeights(); main.appendChild(VIEWS.heights);
   }
